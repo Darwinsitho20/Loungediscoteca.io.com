@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discoteca Lounge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://img.freepik.com/vector-gratis/plantilla-fiesta-baile-latino-degradado_23-2149290428.jpg'); /* Coloca aquí tu imagen de fondo */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            text-align: center;
+            font-size: 2rem;
+            color: #00eaff;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: rgba(28, 28, 28, 0.8);
+            border-radius: 10px;
+            margin: 15px;
+            width: 300px;
+            text-align: center;
+            padding: 15px;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .card img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #00eaff;
+            margin: 15px 0;
+        }
+
+        .event-date {
+            background-color: #00eaff;
+            color: #000;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .info-box {
+            display: none;
+            position: absolute;
+            bottom: 50px;
+            left: 10px;
+            width: 280px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+            color: #000;
+            text-align: left;
+        }
+
+        .card:hover .info-box,
+        .card .info-box.active {
+            display: block;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            padding: 20px;
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        a.button {
+            background-color: #00eaff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #000;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            display: block; /* Cambiado para que ocupen toda la línea */
+            margin-top: 10px; /* Separar botones hacia abajo */
+        }
+
+        a.button:hover {
+            background-color: #008fcc;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Bienvenido a Discoteca Lounge
+    </header>
+
+    <div class="container">
+        <!-- Tarjeta 1 -->
+        <div class="card">
+            <img src="https://www.rockandpop.cl/wp-content/uploads/2022/06/fiesta-768x432.jpg" alt="Imagen del evento">
+            <h2 class="card-title">Chill Domingo</h2>
+            <div class="event-date">22 de Octubre</div>
+            <a href="evento.html" class="button">Unirse a su evento</a>
+        </div>
+
+        <!-- Tarjeta 2 -->
+        <div class="card">
+            <img src="https://img.freepik.com/fotos-premium/dj-controles-mezcla-discoteca_768772-1625.jpg" alt="Imagen del evento">
+            <h2 class="card-title">DJ Residente</h2>
+            <div class="event-date">Todos los Viernes</div>
+            <a href="#" class="button info-btn">Más información</a>
+            <div class="info-box">
+                <p>Disfruta de la mejor música con nuestro DJ residente, todos los viernes, sabados y domingos por la noche. ¡No te lo pierdas!</p>
+            </div>
+        </div>
+
+        <!-- Tarjeta 3 -->
+        <div class="card">
+            <img src="https://i.pinimg.com/550x/ba/a1/ab/baa1ab0b3ef9720fde237b47ad2b770b.jpg" alt="Imagen del evento">
+            <h2 class="card-title">Fiesta Próxima</h2>
+            <div class="event-date">5 de Noviembre</div>
+            <a href="entradas.html" class="button">Comprar entradas</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 Discoteca Lounge. Todos los derechos reservados.
+    </footer>
+
+    <script>
+        // Mostrar información al hacer click en "Más información"
+        document.querySelectorAll('.info-btn').forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                const infoBox = this.nextElementSibling;
+                infoBox.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
