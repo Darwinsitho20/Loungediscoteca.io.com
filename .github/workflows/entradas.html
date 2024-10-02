@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprar Entradas - Discoteca Lounge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 2rem;
+            color: #00eaff;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            background-color: rgba(28, 28, 28, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        button {
+            background-color: #00eaff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            color: #000;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #008fcc;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            color: #00eaff;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            text-align: center;
+            padding: 20px;
+            color: #fff;
+            margin-top: 20px;
+            position: relative;
+            width: 100%;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <header>
+        Comprar Entradas
+    </header>
+
+    <div class="form-container">
+        <form id="purchase-ticket-form">
+            <label for="number-of-tickets">Número de Entradas:</label>
+            <input type="number" id="number-of-tickets" name="number-of-tickets" min="1" required>
+
+            <div class="price" id="total-price">Precio Total: $0COP</div>
+
+            <button type="submit">Comprar Entradas</button>
+        </form>
+    </div>
+
+    <footer>
+        &copy; 2024 Discoteca Lounge. Todos los derechos reservados.
+    </footer>
+
+    <script>
+        const ticketPrice = 20000; // Precio por entrada
+
+        document.getElementById('number-of-tickets').addEventListener('input', function() {
+            const numberOfTickets = this.value;
+            const totalPrice = numberOfTickets * ticketPrice;
+            document.getElementById('total-price').innerText = `Precio Total: $${totalPrice}`;
+        });
+
+        document.getElementById('purchase-ticket-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const numberOfTickets = document.getElementById('number-of-tickets').value;
+
+            // Generar PDF
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Título del documento
+            doc.setFontSize(20);
+            doc.text('Recibo de Compra de Entradas', 105, 20, null, null, 'center');
+
+            // Información del recibo
+            doc.setFontSize(12);
+            doc.text(`Número de Entradas: ${numberOfTickets}`, 10, 40);
+            doc.text(`Precio por Entrada: $${ticketPrice}`, 10, 50);
+            doc.text(`Precio Total: $${numberOfTickets * ticketPrice}`, 10, 60);
+
+            // Agregar sello de la discoteca
+            const imageUrl = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA...'; // Aquí deberías colocar la URL de tu imagen o el código base64 del sello
+            const img = new Image();
+            img.src = imageUrl;
+
+            img.onload = function() {
+                doc.addImage(img, 'PNG', 10, 90, 50, 50);
+                doc.save('recibo_compra_entradas.pdf');
+            };
+
+            // Mensaje de confirmación
+            alert('¡Gracias por comprar tus entradas! Te esperamos en el evento.');
+        });
+    </script>
+</body>
+</html>
